@@ -1,15 +1,52 @@
 function getComputerChoice() {
     const computerRandomNum = Math.random();
     let computerChoice = "";
-    console.log(computerRandomNum);
     if (computerRandomNum > 0.66) {
-        computerChoice = "Rock";
+        computerChoice = "rock";
     } else if (computerRandomNum > 0.33 && computerRandomNum < 0.66) {
-        computerChoice = "Paper";
+        computerChoice = "paper";
     } else {
-        computerChoice = "Scissors";
+        computerChoice = "scissors";
     }
     return computerChoice;
 }
 
-console.log(getComputerChoice());
+function determineWinner(computerChoice, playerChoice) {
+    alert(`The computer's choice was ${computerChoice}`);
+    switch (computerChoice) {
+        case "rock":
+            if (playerChoice === "rock") {
+                return "It's a draw!";
+            } else if (playerChoice === "paper") {
+                return "You Win! Paper beats rock"; 
+            } else {
+                return "You lose! Rock beats scissors";
+            }
+        case "paper":
+            if (playerChoice === "rock") {
+                return "You lose! Paper beats rock";
+            } else if (playerChoice === "paper") {
+                return "It's a draw!"; 
+            } else {
+                return "You win! Scissors beats paper";
+            }
+        case "scissors":
+            if (playerChoice === "rock") {
+                return "You win! Rock beats scissors";
+            } else if (playerChoice === "paper") {
+                return "You lose! Scissors beats paper"; 
+            } else {
+                return "It's a draw!";
+            }
+    }
+
+}
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = prompt("Make your choice - Rock, paper or scissors?").toLowerCase();
+        alert(determineWinner(getComputerChoice(), playerSelection));
+    }
+}
+
+game();
