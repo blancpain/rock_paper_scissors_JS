@@ -1,1 +1,1 @@
-# rock_paper_scissors_JS
+First program in JS. The classic rock paper scissors game. 
