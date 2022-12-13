@@ -53,3 +53,11 @@ const buttons = document.querySelectorAll('button');
 buttons.forEach( (button) => {
     button.addEventListener('click', playRound);
 });
+
+const container = document.querySelector('#container');
+
+const results = document.createElement('div');
+results.textContent = "Current score: ";
+
+
+container.appendChild(results);
