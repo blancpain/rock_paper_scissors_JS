@@ -1,5 +1,5 @@
 const OPTIONS = ['paper', 'rock', 'scissors'];
-//containers
+//DOM elements
 const container = document.querySelector('#container');
 const results = document.createElement('div');
 const roundWinner = document.createElement('div');
@@ -9,15 +9,16 @@ container.appendChild(results);
 //starting scores
 let playerScore = 0;
 let computerScore = 0;
-updateScore();
+displayScore();
 
-function updateScore() {
-    score.textContent = `Player: ${playerScore}; Computer: ${computerScore}`;
+function displayScore() {
+    score.textContent = `You: ${playerScore} | Computer: ${computerScore}`;
     results.appendChild(score);
 }
 
 function displayRoundWinner(playerSelection, computerChoice, winner) {
-    roundWinner.textContent = `Player selected ${playerSelection}. Computer selected ${computerChoice}. The result is ${winner}.`;
+    roundWinner.setAttribute('style', 'font-style: italic; margin-top: 3em; color: purple; font-size: 40px');
+    roundWinner.textContent = `You selected ${playerSelection}. Computer selected ${computerChoice}. ${winner}`;
     results.appendChild(roundWinner);
 }
 
@@ -36,22 +37,22 @@ function determineWinner(playerChoice, computerChoice) {
         return computerChoice === 'paper' ? [1,0] : computerChoice === 'rock' ? [0,1] : [1,0];
     }
 }
-
+//button action
 const buttons = document.querySelectorAll('button');
-
 buttons.forEach( (button) => {
     button.addEventListener('click', playRound);
 });
 
+//main game function
 function playRound() {
     if (playerScore < 4 && computerScore < 4) {
         const playerSelection = this.id;
         const computerChoice = getComputerChoice();
         const outcome = determineWinner(playerSelection,computerChoice);
-        const winner = outcome[0] > outcome[1] ? "a win for the human race!" : outcome[1] > outcome[0] ? "a win for computers :(" : "a dead draw.";
+        const winner = outcome[0] > outcome[1] ? "Win for the human race!" : outcome[1] > outcome[0] ? "Win for computers :(" : "A dead draw.";
         playerScore += outcome[0];
         computerScore += outcome[1];
-        updateScore();
+        displayScore();
         displayRoundWinner(playerSelection, computerChoice, winner);
     } else {
         const finalWinner = playerScore > computerScore ? "You" : "The computer";
