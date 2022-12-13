@@ -42,11 +42,14 @@ function determineWinner(computerChoice, playerChoice) {
 
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Make your choice - Rock, paper or scissors?").toLowerCase();
-        alert(determineWinner(getComputerChoice(), playerSelection));
-    }
+function playRound() {
+
+    const playerSelection = this.id;
+    alert(determineWinner(getComputerChoice(), playerSelection));
 }
 
-game();
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach( (button) => {
+    button.addEventListener('click', playRound);
+});
